@@ -474,3 +474,54 @@
     (xoshiro512**:jump/long rng)
     (is (equalp (xoshiro512**:vector/u64 rng 4)
                 #(#x7d49e50367b9ca8f #xc918fcc30a5cc624 #x54b7ad08d10e79ec #x81afb3ea3799016)))))
+
+(test xoroshiro64*.shuffle
+  (is (shuffle-permutes-p #'xoroshiro64*:make-rng #'xoroshiro64*:shuffle)))
+
+(test xoroshiro64**.shuffle
+  (is (shuffle-permutes-p #'xoroshiro64**:make-rng #'xoroshiro64**:shuffle)))
+
+(test xoroshiro128+.shuffle
+  (is (shuffle-permutes-p #'xoroshiro128+:make-rng #'xoroshiro128+:shuffle)))
+
+(test xoroshiro128++.shuffle
+  (is (shuffle-permutes-p #'xoroshiro128++:make-rng #'xoroshiro128++:shuffle)))
+
+(test xoroshiro128**.shuffle
+  (is (shuffle-permutes-p #'xoroshiro128**:make-rng #'xoroshiro128**:shuffle)))
+
+(test xoroshiro1024++.shuffle
+  (is (shuffle-permutes-p #'xoroshiro1024++:make-rng #'xoroshiro1024++:shuffle)))
+
+(test xoroshiro1024*.shuffle
+  (is (shuffle-permutes-p #'xoroshiro1024*:make-rng #'xoroshiro1024*:shuffle)))
+
+(test xoroshiro1024**.shuffle
+  (is (shuffle-permutes-p #'xoroshiro1024**:make-rng #'xoroshiro1024**:shuffle)))
+
+(test xoshiro128+.shuffle
+  (is (shuffle-permutes-p #'xoshiro128+:make-rng #'xoshiro128+:shuffle)))
+
+(test xoshiro128++.shuffle
+  (is (shuffle-permutes-p #'xoshiro128++:make-rng #'xoshiro128++:shuffle)))
+
+(test xoshiro128**.shuffle
+  (is (shuffle-permutes-p #'xoshiro128**:make-rng #'xoshiro128**:shuffle)))
+
+(test xoshiro256+.shuffle
+  (is (shuffle-permutes-p #'xoshiro256+:make-rng #'xoshiro256+:shuffle)))
+
+(test xoshiro256++.shuffle
+  (is (shuffle-permutes-p #'xoshiro256++:make-rng #'xoshiro256++:shuffle)))
+
+(test xoshiro256**.shuffle
+  (is (shuffle-permutes-p #'xoshiro256**:make-rng #'xoshiro256**:shuffle)))
+
+(test xoshiro512+.shuffle
+  (is (shuffle-permutes-p #'xoshiro512+:make-rng #'xoshiro512+:shuffle)))
+
+(test xoshiro512++.shuffle
+  (is (shuffle-permutes-p #'xoshiro512++:make-rng #'xoshiro512++:shuffle)))
+
+(test xoshiro512**.shuffle
+  (is (shuffle-permutes-p #'xoshiro512**:make-rng #'xoshiro512**:shuffle)))

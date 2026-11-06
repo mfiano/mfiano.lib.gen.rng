@@ -23,3 +23,20 @@
   (:use #:cl #:1am))
 
 (in-package #:mfiano.lib.gen.rng/test)
+
+(defparameter *seed* #x0123456789abcdef)
+
+(defun shuffle-permutes-p (make-rng shuffle)
+  (let ((rng (funcall make-rng *seed*))
+        (seen-swap nil))
+    (and (loop :repeat 100
+               :always (let ((pair (funcall shuffle rng (vector 0 1))))
+                         (when (equalp pair #(1 0))
+                           (setf seen-swap t))
+                         (or (equalp pair #(0 1)) (equalp pair #(1 0)))))
+         seen-swap
+         (loop :repeat 100
+               :always (equalp (sort (funcall shuffle rng (coerce (loop :for i :below 50 :collect i)
+                                                                  'vector))
+                                     #'<)
+                               (coerce (loop :for i :below 50 :collect i) 'vector))))))

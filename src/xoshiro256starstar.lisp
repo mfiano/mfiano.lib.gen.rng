@@ -262,7 +262,7 @@
 (defun shuffle (rng sequence)
   (let ((length (length sequence)))
     (check-type length u:i64)
-    (dotimes (i (- length 2))
+    (dotimes (i (1- length))
       (rotatef (elt sequence i) (elt sequence (range rng i length))))
     sequence))
 
