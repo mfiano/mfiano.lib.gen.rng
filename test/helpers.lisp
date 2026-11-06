@@ -40,3 +40,9 @@
                                                                   'vector))
                                      #'<)
                                (coerce (loop :for i :below 50 :collect i) 'vector))))))
+
+(defun copy-continues-stream-p (make-rng copy draw)
+  (let ((rng (funcall make-rng *seed*)))
+    (loop :repeat 5 :do (funcall draw rng))
+    (let ((twin (funcall copy rng)))
+      (loop :repeat 32 :always (= (funcall draw rng) (funcall draw twin))))))

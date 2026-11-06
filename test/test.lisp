@@ -478,50 +478,101 @@
 (test xoroshiro64*.shuffle
   (is (shuffle-permutes-p #'xoroshiro64*:make-rng #'xoroshiro64*:shuffle)))
 
+(test xoroshiro64*.copy
+  (is (copy-continues-stream-p #'xoroshiro64*:make-rng #'xoroshiro64*:copy #'xoroshiro64*:u32)))
+
 (test xoroshiro64**.shuffle
   (is (shuffle-permutes-p #'xoroshiro64**:make-rng #'xoroshiro64**:shuffle)))
+
+(test xoroshiro64**.copy
+  (is (copy-continues-stream-p #'xoroshiro64**:make-rng #'xoroshiro64**:copy #'xoroshiro64**:u32)))
 
 (test xoroshiro128+.shuffle
   (is (shuffle-permutes-p #'xoroshiro128+:make-rng #'xoroshiro128+:shuffle)))
 
+(test xoroshiro128+.copy
+  (is (copy-continues-stream-p #'xoroshiro128+:make-rng #'xoroshiro128+:copy #'xoroshiro128+:u64)))
+
 (test xoroshiro128++.shuffle
   (is (shuffle-permutes-p #'xoroshiro128++:make-rng #'xoroshiro128++:shuffle)))
+
+(test xoroshiro128++.copy
+  (is (copy-continues-stream-p #'xoroshiro128++:make-rng #'xoroshiro128++:copy #'xoroshiro128++:u64)))
 
 (test xoroshiro128**.shuffle
   (is (shuffle-permutes-p #'xoroshiro128**:make-rng #'xoroshiro128**:shuffle)))
 
+(test xoroshiro128**.copy
+  (is (copy-continues-stream-p #'xoroshiro128**:make-rng #'xoroshiro128**:copy #'xoroshiro128**:u64)))
+
 (test xoroshiro1024++.shuffle
   (is (shuffle-permutes-p #'xoroshiro1024++:make-rng #'xoroshiro1024++:shuffle)))
+
+(test xoroshiro1024++.copy
+  (is (copy-continues-stream-p #'xoroshiro1024++:make-rng #'xoroshiro1024++:copy #'xoroshiro1024++:u64)))
 
 (test xoroshiro1024*.shuffle
   (is (shuffle-permutes-p #'xoroshiro1024*:make-rng #'xoroshiro1024*:shuffle)))
 
+(test xoroshiro1024*.copy
+  (is (copy-continues-stream-p #'xoroshiro1024*:make-rng #'xoroshiro1024*:copy #'xoroshiro1024*:u64)))
+
 (test xoroshiro1024**.shuffle
   (is (shuffle-permutes-p #'xoroshiro1024**:make-rng #'xoroshiro1024**:shuffle)))
+
+(test xoroshiro1024**.copy
+  (is (copy-continues-stream-p #'xoroshiro1024**:make-rng #'xoroshiro1024**:copy #'xoroshiro1024**:u64)))
 
 (test xoshiro128+.shuffle
   (is (shuffle-permutes-p #'xoshiro128+:make-rng #'xoshiro128+:shuffle)))
 
+(test xoshiro128+.copy
+  (is (copy-continues-stream-p #'xoshiro128+:make-rng #'xoshiro128+:copy #'xoshiro128+:u32)))
+
 (test xoshiro128++.shuffle
   (is (shuffle-permutes-p #'xoshiro128++:make-rng #'xoshiro128++:shuffle)))
+
+(test xoshiro128++.copy
+  (is (copy-continues-stream-p #'xoshiro128++:make-rng #'xoshiro128++:copy #'xoshiro128++:u32)))
 
 (test xoshiro128**.shuffle
   (is (shuffle-permutes-p #'xoshiro128**:make-rng #'xoshiro128**:shuffle)))
 
+(test xoshiro128**.copy
+  (is (copy-continues-stream-p #'xoshiro128**:make-rng #'xoshiro128**:copy #'xoshiro128**:u32)))
+
 (test xoshiro256+.shuffle
   (is (shuffle-permutes-p #'xoshiro256+:make-rng #'xoshiro256+:shuffle)))
+
+(test xoshiro256+.copy
+  (is (copy-continues-stream-p #'xoshiro256+:make-rng #'xoshiro256+:copy #'xoshiro256+:u64)))
 
 (test xoshiro256++.shuffle
   (is (shuffle-permutes-p #'xoshiro256++:make-rng #'xoshiro256++:shuffle)))
 
+(test xoshiro256++.copy
+  (is (copy-continues-stream-p #'xoshiro256++:make-rng #'xoshiro256++:copy #'xoshiro256++:u64)))
+
 (test xoshiro256**.shuffle
   (is (shuffle-permutes-p #'xoshiro256**:make-rng #'xoshiro256**:shuffle)))
+
+(test xoshiro256**.copy
+  (is (copy-continues-stream-p #'xoshiro256**:make-rng #'xoshiro256**:copy #'xoshiro256**:u64)))
 
 (test xoshiro512+.shuffle
   (is (shuffle-permutes-p #'xoshiro512+:make-rng #'xoshiro512+:shuffle)))
 
+(test xoshiro512+.copy
+  (is (copy-continues-stream-p #'xoshiro512+:make-rng #'xoshiro512+:copy #'xoshiro512+:u64)))
+
 (test xoshiro512++.shuffle
   (is (shuffle-permutes-p #'xoshiro512++:make-rng #'xoshiro512++:shuffle)))
 
+(test xoshiro512++.copy
+  (is (copy-continues-stream-p #'xoshiro512++:make-rng #'xoshiro512++:copy #'xoshiro512++:u64)))
+
 (test xoshiro512**.shuffle
   (is (shuffle-permutes-p #'xoshiro512**:make-rng #'xoshiro512**:shuffle)))
+
+(test xoshiro512**.copy
+  (is (copy-continues-stream-p #'xoshiro512**:make-rng #'xoshiro512**:copy #'xoshiro512**:u64)))

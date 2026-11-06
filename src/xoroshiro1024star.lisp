@@ -112,7 +112,9 @@
 
 (define-ftype copy (rng) rng)
 (defun copy (rng)
-  (%make-rng (copy-seq (state rng))))
+  (let ((copy (%make-rng (copy-seq (state rng)))))
+    (setf (cursor copy) (cursor rng))
+    copy))
 
 (define-ftype next (rng) u:u64)
 (declaim (inline next))
