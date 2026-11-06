@@ -41,4 +41,5 @@
   :pathname "test"
   :serial t
   :components
-  ((:file "test")))
+  ((:file "helpers")
+   (:file "test")))

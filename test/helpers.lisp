@@ -1,0 +1,25 @@
+(in-package #:mfiano.lib.base.pkg)
+
+(define-package #:mfiano.lib.gen.rng/test
+  (:local-nicknames
+   (#:u #:mfiano.lib.base.util)
+   (#:xoroshiro64* #:mfiano.lib.gen.rng.xoroshiro64*)
+   (#:xoroshiro64** #:mfiano.lib.gen.rng.xoroshiro64**)
+   (#:xoroshiro128+ #:mfiano.lib.gen.rng.xoroshiro128+)
+   (#:xoroshiro128++ #:mfiano.lib.gen.rng.xoroshiro128++)
+   (#:xoroshiro128** #:mfiano.lib.gen.rng.xoroshiro128**)
+   (#:xoroshiro1024++ #:mfiano.lib.gen.rng.xoroshiro1024++)
+   (#:xoroshiro1024* #:mfiano.lib.gen.rng.xoroshiro1024*)
+   (#:xoroshiro1024** #:mfiano.lib.gen.rng.xoroshiro1024**)
+   (#:xoshiro128+ #:mfiano.lib.gen.rng.xoshiro128+)
+   (#:xoshiro128++ #:mfiano.lib.gen.rng.xoshiro128++)
+   (#:xoshiro128** #:mfiano.lib.gen.rng.xoshiro128**)
+   (#:xoshiro256+ #:mfiano.lib.gen.rng.xoshiro256+)
+   (#:xoshiro256++ #:mfiano.lib.gen.rng.xoshiro256++)
+   (#:xoshiro256** #:mfiano.lib.gen.rng.xoshiro256**)
+   (#:xoshiro512+ #:mfiano.lib.gen.rng.xoshiro512+)
+   (#:xoshiro512++ #:mfiano.lib.gen.rng.xoshiro512++)
+   (#:xoshiro512** #:mfiano.lib.gen.rng.xoshiro512**))
+  (:use #:cl #:1am))
+
+(in-package #:mfiano.lib.gen.rng/test)
