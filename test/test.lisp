@@ -5,10 +5,34 @@
     (is (equalp (xoroshiro64*:vector/u32 rng 4)
                 #(#xd0433c1d #x9063d494 #x4aa5ea1c #x1ac2f157)))))
 
+(test xoroshiro64*.jump
+  (let ((rng (xoroshiro64*:make-rng #x0123456789abcdef)))
+    (xoroshiro64*:jump rng)
+    (is (equalp (xoroshiro64*:vector/u32 rng 4)
+                #(#x4193a46a #x79ad47d5 #xea00a829 #x54ac9ba4)))))
+
+(test xoroshiro64*.jump/long
+  (let ((rng (xoroshiro64*:make-rng #x0123456789abcdef)))
+    (xoroshiro64*:jump/long rng)
+    (is (equalp (xoroshiro64*:vector/u32 rng 4)
+                #(#x7bb74beb #x7240f0b9 #x42944c3d #xb61e6e5e)))))
+
 (test xoroshiro64**.state
   (let ((rng (xoroshiro64**:make-rng #x0123456789abcdef)))
     (is (equalp (xoroshiro64**:vector/u32 rng 4)
                 #(#x2a0592a2 #x3e64dcda #xa7b251ad #xb9d6d66f)))))
+
+(test xoroshiro64**.jump
+  (let ((rng (xoroshiro64**:make-rng #x0123456789abcdef)))
+    (xoroshiro64**:jump rng)
+    (is (equalp (xoroshiro64**:vector/u32 rng 4)
+                #(#xfc46c268 #xc4ce56b #x40691a31 #xebe146b2)))))
+
+(test xoroshiro64**.jump/long
+  (let ((rng (xoroshiro64**:make-rng #x0123456789abcdef)))
+    (xoroshiro64**:jump/long rng)
+    (is (equalp (xoroshiro64**:vector/u32 rng 4)
+                #(#x528f732b #x689673e6 #x9cafa648 #xd304fb2e)))))
 
 (test xoroshiro128+.state
   (let ((rng (xoroshiro128+:make-rng #x0123456789abcdef)))
@@ -264,6 +288,34 @@
     (xoshiro512**:jump/long rng)
     (is (equalp (xoshiro512**:vector/u64 rng 4)
                 #(#xbde57c6814ae4814 #x91de16153f539916 #x0439d088676fc9bc #x10aa0e6e65b179c1)))))
+
+(test xoroshiro64*.jump/mid
+  (let ((rng (xoroshiro64*:make-rng #x0123456789abcdef)))
+    (dotimes (i 5) (xoroshiro64*:u32 rng))
+    (xoroshiro64*:jump rng)
+    (is (equalp (xoroshiro64*:vector/u32 rng 4)
+                #(#xa2f21f11 #x6ab5b530 #xb09d4c13 #x713a3c0f)))))
+
+(test xoroshiro64*.jump/long/mid
+  (let ((rng (xoroshiro64*:make-rng #x0123456789abcdef)))
+    (dotimes (i 5) (xoroshiro64*:u32 rng))
+    (xoroshiro64*:jump/long rng)
+    (is (equalp (xoroshiro64*:vector/u32 rng 4)
+                #(#xf36a2e6e #x9c1bde93 #x5b722d6d #x8ffb6e3e)))))
+
+(test xoroshiro64**.jump/mid
+  (let ((rng (xoroshiro64**:make-rng #x0123456789abcdef)))
+    (dotimes (i 5) (xoroshiro64**:u32 rng))
+    (xoroshiro64**:jump rng)
+    (is (equalp (xoroshiro64**:vector/u32 rng 4)
+                #(#xd7536b04 #xb1913e41 #x624f8c4e #xc46589a6)))))
+
+(test xoroshiro64**.jump/long/mid
+  (let ((rng (xoroshiro64**:make-rng #x0123456789abcdef)))
+    (dotimes (i 5) (xoroshiro64**:u32 rng))
+    (xoroshiro64**:jump/long rng)
+    (is (equalp (xoroshiro64**:vector/u32 rng 4)
+                #(#x225d0556 #x916b1c3f #x275c6457 #xfd24e715)))))
 
 (test xoroshiro128+.jump/mid
   (let ((rng (xoroshiro128+:make-rng #x0123456789abcdef)))

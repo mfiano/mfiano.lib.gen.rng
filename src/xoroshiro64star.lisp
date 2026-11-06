@@ -28,6 +28,8 @@
    #:i16
    #:i32
    #:i64
+   #:jump
+   #:jump/long
    #:make-rng
    #:range
    #:rng
@@ -56,6 +58,18 @@
   (dotimes (i (length vector))
     (setf (aref vector i) (funcall func rng)))
   vector)
+
+(defmacro %jump (rng jump-state)
+  `(let ((state (state ,rng))
+         (new-state (make-u32-array ,(length jump-state))))
+     (declare (dynamic-extent new-state))
+     (do-each (x ,jump-state)
+       (dotimes (bit 32)
+         (when (logbitp bit x)
+           (map-into new-state #'logxor new-state state))
+         (next ,rng)))
+     (replace state new-state)
+     (values)))
 
 ;;; Seed mixer (splitmix64)
 
@@ -257,3 +271,13 @@
     (dotimes (i (1- length))
       (rotatef (elt sequence i) (elt sequence (range rng i length))))
     sequence))
+
+(define-ftype jump (rng) (values))
+(defun jump (rng)
+  (declare (optimize (speed 3)))
+  (%jump rng #(#x77fcd1a0 #x4cbf99bd)))
+
+(define-ftype jump/long (rng) (values))
+(defun jump/long (rng)
+  (declare (optimize (speed 3)))
+  (%jump rng #(#x3f1f8b95 #xb4e7e463)))

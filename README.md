@@ -7,7 +7,7 @@ Design goals:
 - **Portable CL** (no implementation-specific tricks).
 - **One file per generator**, intentionally self-contained: each variant duplicates the few utilities it needs so you can copy a single file/package anywhere without dragging a framework behind it.
 - **Fast, high-quality non-crypto RNGs** for games, simulation, procedural generation, sampling, shuffling, etc.
-- **Consistent API** across all variants: same public function names; only the *native word size* differs, and only some variants support `jump` / `jump/long`.
+- **Consistent API** across all variants: same public function names; only the *native word size* differs.
 
 > These generators are **not cryptographically secure**. If you need adversarial unpredictability, use a CSPRNG.
 
@@ -24,10 +24,6 @@ These have the smallest state and are excellent general-purpose RNGs.
 - `xoroshiro128++` (2x 64-bit words; total state = 128 bits)
 - `xoroshiro128**` (2x 64-bit words; total state = 128 bits)
 
-Notes:
-- The two `xoroshiro64` variants **do not support** `jump` / `long_jump` (state is too small).
-- The 128-bit-state xoroshiro variants **do** support jumping.
-
 ### xoshiro (larger state, "bigger hammer")
 These use more state and generally have stronger statistical behavior for heavy-duty use.
 
@@ -41,9 +37,6 @@ These use more state and generally have stronger statistical behavior for heavy-
 - `xoshiro512++` (8x 64-bit words; total state = 512 bits)
 - `xoshiro512**` (8x 64-bit words; total state = 512 bits)
 
-Notes:
-- All xoshiro variants support `jump` and `long_jump`.
-
 ### xoroshiro1024 (huge state, extra cursor state)
 These are the "huge state" xoroshiro variants and include an additional cursor/index.
 
@@ -53,7 +46,6 @@ These are the "huge state" xoroshiro variants and include an additional cursor/i
 
 Notes:
 - These variants carry an extra internal **cursor/index** (the reference C code uses `p`).
-- They support `jump` / `long_jump`.
 
 ## Package layout
 
@@ -154,9 +146,9 @@ For 32-bit-word generators that need to synthesize 64-bit or 53-bit quantities, 
 
 This is deliberate: for these families, if you need "good random bits", prefer the high bits.
 
-## Jumping ahead (for supported variants)
+## Jumping ahead
 
-Many variants export:
+All variants export:
 
 * `jump`
 * `jump/long`
@@ -172,21 +164,6 @@ Why you'd use this:
 * Chunk-based procedural generation (one stream per region)
 * Reproducible simulation partitions
 
-### Which variants support jumping?
-
-* **No jump support:**
-
-  * `xoroshiro64*`
-  * `xoroshiro64**`
-
-* **jump + long_jump supported:**
-
-  * `xoroshiro128+`, `xoroshiro128++`, `xoroshiro128**`
-  * `xoshiro128+`, `xoshiro128++`, `xoshiro128**`
-  * `xoshiro256+`, `xoshiro256++`, `xoshiro256**`
-  * `xoshiro512+`, `xoshiro512++`, `xoshiro512**`
-  * `xoroshiro1024*`, `xoroshiro1024++`, `xoroshiro1024**`
-
 ## Choosing a variant (practical guidance)
 
 If you don't want to think too hard:
@@ -194,7 +171,7 @@ If you don't want to think too hard:
 * **Default "small-state, great performance":** `xoroshiro128**` or `xoroshiro128++`
 * **Default "bigger state, extra safety margin":** `xoshiro256**` or `xoshiro256++`
 * **Need lots of independent streams with huge state:** `xoroshiro1024**` / `xoshiro512**`
-* **Tiny 32-bit-word generator:** `xoroshiro64**` (simple, fast, no jump)
+* **Tiny 32-bit-word generator:** `xoroshiro64**` (simple, fast)
 
 Rules of thumb:
 
@@ -245,7 +222,7 @@ All variants export the following symbols:
 * `element (rng sequence) -> element-or-nil`
 * `shuffle (rng sequence) -> sequence`
 
-### Jumping (only for supported variants)
+### Jumping
 
 * `jump (rng) -> (values)`
 * `jump/long (rng) -> (values)`
