@@ -5,7 +5,8 @@
   :homepage "https://github.com/mfiano/mfiano.lib.gen.rng"
   :encoding :utf-8
   :depends-on
-  (#:mfiano.lib.base)
+  (#:ironclad/core
+   #:mfiano.lib.base)
   :in-order-to ((test-op (test-op #:mfiano.lib.gen.rng/test)))
   :pathname "src"
   :serial t

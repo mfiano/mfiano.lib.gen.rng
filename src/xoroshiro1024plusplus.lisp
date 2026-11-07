@@ -104,8 +104,8 @@
   (state (make-u64-array 16) :type (u64-array 16))
   (cursor 0 :type (integer 0 15)))
 
-(define-ftype make-rng (u:u64) rng)
-(defun make-rng (seed)
+(define-ftype make-rng (&optional u:u64) rng)
+(defun make-rng (&optional (seed (ironclad:strong-random u:max/u64)))
   (let ((vector (make-u64-array 16)))
     (fill-vector (make-seed-mixer seed) vector #'mix-seed)
     (%make-rng vector)))

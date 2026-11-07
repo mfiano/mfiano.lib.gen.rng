@@ -69,6 +69,12 @@ Example:
 
 Seeds are mixed with **SplitMix64**, then truncated/expanded as needed to populate the variant's internal state.
 
+The seed is optional. Without one, `make-rng` draws a 64-bit seed from the operating system's random source through ironclad, so every unseeded generator starts from an unpredictable state:
+
+```lisp
+(defparameter *rng* (mfiano.lib.gen.rng.xoroshiro64**:make-rng))
+```
+
 ### Pull values
 
 All variants export the same set of basic functions:
@@ -187,7 +193,7 @@ Given:
 * same variant,
 * same sequence of calls,
 
-you'll get identical output sequences across runs.
+you'll get identical output sequences across runs. Pass a seed whenever you need a sequence again; an unseeded generator can't be reproduced.
 
 The library deliberately keeps each variant's behavior "local": no global PRNG state, and no implicit reseeding.
 
@@ -198,7 +204,7 @@ All variants export the following symbols:
 ### Construction / state
 
 * `rng` (type / struct)
-* `make-rng (seed)`
+* `make-rng (&optional seed)`
 * `copy (rng)`
 
 ### Core sampling

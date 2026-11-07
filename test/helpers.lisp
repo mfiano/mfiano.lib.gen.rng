@@ -65,6 +65,12 @@
     (let ((twin (funcall copy rng)))
       (loop :repeat 32 :always (= (funcall draw rng) (funcall draw twin))))))
 
+(defun unseeded-streams-differ-p (make-rng draw)
+  (let ((rng1 (funcall make-rng))
+        (rng2 (funcall make-rng)))
+    (not (equal (loop :repeat 4 :collect (funcall draw rng1))
+                (loop :repeat 4 :collect (funcall draw rng2))))))
+
 (defun wide*-exact-p (size)
   (let ((rng (mfiano.lib.gen.rng.xoshiro256++:make-rng *seed*))
         (edges (list 0 1 2 (1- (ash 1 (1- size))) (ash 1 (1- size)) (1- (ash 1 size)))))
